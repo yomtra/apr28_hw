@@ -1,8 +1,22 @@
-#creates a variable that lets me make multiple security groups dynamically
+#make multiple security groups dynamically
 variable "security_groups" {
   type = map(object({
     name        = string
     description = string
     vpc_id      = string
+    ingress     = list(object({
+      from_port   = number
+      to_port     = number
+      protocol    = string
+      cidr_blocks  = list(string)
+      description = string
+    }))
+    egress      = list(object({
+      from_port   = number
+      to_port     = number
+      protocol    = string
+      cidr_blocks  = list(string)
+      description = string
+    }))
   }))  
 }
